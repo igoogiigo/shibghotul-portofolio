@@ -24,7 +24,13 @@ import {
   Award,
   ArrowUpRight,
   Send,
-  MessageSquare
+  MessageSquare,
+  Wallet,
+  Languages,
+  Sparkles,
+  Gamepad2,
+  School,
+  Code2
 } from 'lucide-react';
 import { cn } from './lib/utils';
 
@@ -45,6 +51,15 @@ interface Certification {
   status?: string;
 }
 
+interface LabProject {
+  title: string;
+  category: string;
+  desc: string;
+  link: string;
+  icon: string;
+  tech: string[];
+}
+
 // --- Data from CV ---
 const DATA = {
   name: "Muhammad Shibghotul 'Adalah",
@@ -53,7 +68,7 @@ const DATA = {
   phone: "+62 8138 2876 886",
   email: "halo.shibghotul@gmail.com",
   linkedin: "https://linkedin.com/in/halo-shibghotul",
-  summary: "IT Support & Application Support professional with 3+ years of experience supporting end-users and business applications in enterprise environments. Strong communication skills with a customer-oriented mindset and ability to translate technical issues into clear solutions. Currently exploring AI-driven development (vibe coding), Supabase, and modern deployment workflows to optimize technical operations.",
+  summary: "IT Support & Application Support professional with 3+ years of experience in enterprise environments. Expert in technical problem-solving, application troubleshooting (L2), and IT asset lifecycle management. Passionate about modernizing IT operations through AI-driven automation, data visualization, and streamlined SOPs.",
   education: {
     school: "Telkom University",
     degree: "Diploma of Information System",
@@ -62,44 +77,43 @@ const DATA = {
     location: "Bandung, Indonesia"
   },
   currentFocus: [
-    { name: "AI Tools", desc: "Leveraging AI for vibe coding and workflow automation." },
-    { name: "Modern Stack", desc: "Exploring Supabase, GitHub, and Vercel for web projects." }
+    { name: "AI Automation", desc: "Building custom tools using AI and Google AppScript to automate IT reporting." },
+    { name: "Modern Ops", desc: "Implementing Vibe Coding workflows for real-time system monitoring." }
   ],
   experience: [
     {
       role: "IT Support",
       company: "PT Aeronusa Inti Raya",
-      period: "Jul 2025 – Present",
+      period: "Jun 2025 – Present",
       location: "Jakarta, Indonesia",
       description: [
-        "Provided daily technical and application support for internal users across head office and branch locations.",
-        "Handled user-reported issues related to system access, applications, and devices through remote and onsite support.",
-        "Managed user access, including account provisioning, password resets, and access control configuration (NAS & internal systems).",
-        "Conducted routine CCTV monitoring and data extraction to support security and operational needs.",
-        "Built simple reporting workflows using Google Forms and Looker Studio for device and system status tracking.",
-        "Logged, tracked, and updated support tasks using Jira."
+        "Managed IT Asset Lifecycle for 100+ devices, including hardware auditing (CPU, RAM, Storage), maintenance, and performance upgrades.",
+        "Enforced IT SOPs through strategic negotiation and user education, ensuring device security and standardized backup procedures.",
+        "Automated daily CCTV monitoring across HO and branches using Google Forms, GSheets, and Looker Studio dashboards.",
+        "Administered User Access Management and file sharing protocols via QNAP NAS systems.",
+        "Provided high-touch technical support, acting as the primary 'go-to' person for complex user issues due to strong communication skills.",
+        "Coordinated with GA and cross-functional teams for seamless device onboarding and offboarding processes."
       ]
     },
     {
-      role: "Application Support",
-      company: "Telkom Indonesia",
-      period: "Jan 2022 – Mar 2025",
+      role: "Application Support (L2)",
+      company: "Telkom Indonesia (Digital Business Technology)",
+      period: "Dec 2021 – Mar 2025",
       location: "Jakarta, Indonesia",
       description: [
-        "Handled 300+ application incidents per month and managed escalations from Level 1 support teams.",
-        "Provided application support for MyIndiHome (mobile & web platform), handling incidents related to user access, payment features, and service activation across Android and iOS.",
-        "Resolved approximately 90% of escalated incidents within SLA through effective troubleshooting and coordination.",
-        "Provided application support for business users, including issue clarification, user guidance, and workaround solutions.",
-        "Performed application error analysis and root cause investigation using log monitoring tools (Kibana, OKD/OCP).",
-        "Collaborated with developers and vendors for bug fixes, application improvements, and post-release evaluation.",
-        "Prepared incident, complaint, and service reports to support operational monitoring and management review.",
-        "Documented recurring issues and solutions to improve support efficiency and knowledge sharing."
+        "Handled L2 application support for myIndiHome, resolving critical issues related to login failures, point redemption, and payment gateway sync.",
+        "Performed deep-dive root cause analysis (RCA) using Kibana, ElasticSearch, and AppDynamics for real-time log tracing.",
+        "Conducted data reconciliation between MariaDB and MongoDB to ensure consistency across enterprise business applications.",
+        "Standardized operational workflows by co-creating the official L2 SOP Flow in Figma, adopted by the entire support team.",
+        "Maintained a comprehensive RCA LogBook that served as a strategic knowledge base for recurring technical issues.",
+        "Executed API testing and troubleshooting using Postman and Swagger to verify backend service integrity (GET/POST/UPDATE).",
+        "Collaborated with developers to implement bug-fixes based on log analysis and user impact reports."
       ]
     }
   ] as Experience[],
   internships: [
     {
-      role: "Partnership Acquisition – Marketing Department",
+      role: "Partnership Acquisition",
       company: "PT Inovasi Digital Inklusi",
       period: "Nov 2021 – Feb 2022",
       location: "Jakarta, Indonesia",
@@ -107,17 +121,10 @@ const DATA = {
     },
     {
       role: "IT Evaluation",
-      company: "Bandung Digital Academy (BADAMI), Dinas Kominfo",
+      company: "Bandung Digital Academy (BADAMI)",
       period: "Jan 2021 – Jun 2021",
       location: "Bandung, Indonesia",
       description: ["Managed content publishing and coordinated event reporting."]
-    },
-    {
-      role: "Mentorship Division",
-      company: "PT Cicil Solusi Mitra Teknologi",
-      period: "Feb 2020 – Oct 2020",
-      location: "Bandung, Indonesia",
-      description: ["Supported student mentorship programs across multiple regions."]
     }
   ] as Experience[],
   certifications: [
@@ -125,15 +132,56 @@ const DATA = {
     { name: "Google IT Support", issuer: "Coursera", period: "Nov 2024 – Mar 2025", url: "https://coursera.org/verify/professional-cert/PIXF1CZY3LI7" },
     { name: "Desain UX Google", issuer: "Coursera", period: "Apr 2024 – Sep 2024", url: "https://coursera.org/verify/professional-cert/KRELKLLPHU28" },
     { name: "Belajar Dasar Visualisasi Data", issuer: "Dicoding", period: "Mar 2024 – Apr 2024", url: "https://www.dicoding.com/certificates/QLZ971YL2P5D" },
-    { name: "Quality Assurance Engineer", issuer: "Binar Academy", period: "Mei 2023 – Sep 2023" },
-    { name: "Complete Beginner QA Engineer: E2E Testing with Cypress", issuer: "BuildWithAngga", period: "Nov 2024 – Feb 2023" }
+    { name: "Quality Assurance Engineer", issuer: "Binar Academy", period: "Mei 2023 – Sep 2023" }
   ] as Certification[],
   skills: {
-    technical: ["End-User & Application Support", "Incident Handling & Troubleshooting", "Ticketing Systems", "User Access Management", "Remote Support Tools (AnyDesk, UltraViewer)"],
-    tools: ["Windows Operating System", "Microsoft Office", "Google Workspace"],
-    soft: ["Communication & Customer Handling", "Problem Solving & Analytical Thinking", "Time Management & Organization", "Collaboration & Teamwork", "Stakeholder Communication", "Emotional Intelligence (EQ)"],
-    languages: ["Bahasa Indonesia (Native)", "English (Conversational)"]
-  }
+    enterprise: ["Application Support (L2)", "Incident Management", "Root Cause Analysis (RCA)", "SOP Standardization", "IT Asset Management"],
+    technical: ["API Testing (Postman/Swagger)", "Log Analysis (Kibana/Elastic)", "Database (MariaDB/MongoDB)", "QNAP NAS Admin", "Networking & Hardware"],
+    automation: ["AI-Assisted Development", "Prompt Engineering", "Google AppScript", "Looker Studio Dashboards", "Vibe Coding Workflows"],
+    soft: ["Stakeholder Negotiation", "Technical Communication", "Problem Solving", "Extrovert & User-Centric Approach"]
+  },
+  labProjects: [
+    {
+      title: "Personal Finance Tracker",
+      category: "Full-stack / Finance",
+      desc: "A clean, minimal personal finance tracker with Supabase integration, real-time charts, and receipt management.",
+      link: "https://personaltrackerfinance.vercel.app/",
+      icon: "Wallet",
+      tech: ["React", "Supabase", "Recharts", "Tailwind"]
+    },
+    {
+      title: "Lingo AI",
+      category: "AI / Education",
+      desc: "AI-powered language learning app featuring Flashcards, Speaking practice, Grammar checks, and AI Chat integration.",
+      link: "https://lingo-ai-omega.vercel.app/",
+      icon: "Languages",
+      tech: ["Next.js", "Gemini API", "Tailwind", "Vercel"]
+    },
+    {
+      title: "InstaCaption AI",
+      category: "Micro SaaS / Marketing",
+      desc: "Micro SaaS web app that generates high-converting Instagram captions in Bahasa Indonesia for UMKM sellers.",
+      link: "https://ai.studio/apps/d645cabe-8688-46d6-9f95-e9a8cd288ea4?fullscreenApplet=true",
+      icon: "Sparkles",
+      tech: ["AI Studio", "Prompt Engineering", "React"]
+    },
+    {
+      title: "SD IT Darunnajah Ecosystem",
+      category: "Web / Education",
+      desc: "Comprehensive digital ecosystem including a custom CMS and official website for an Islamic elementary school in Bengkulu.",
+      link: "https://ai.studio/apps/e0708996-bf91-4546-9fde-6a6a562fe2c0?fullscreenApplet=true",
+      icon: "School",
+      tech: ["React", "CMS", "Tailwind"]
+    },
+    {
+      title: "Futuristic Esports Arena",
+      category: "UI/UX / Gaming",
+      desc: "Premium futuristic redesign for an esports arena and gaming cafe in Jakarta, featuring a high-tech aesthetic.",
+      link: "https://ai.studio/apps/a1f475d0-cf07-4a7c-b834-db70d1bce3e1?fullscreenApplet=true",
+      icon: "Gamepad2",
+      tech: ["UI/UX", "React", "Framer Motion"]
+    }
+  ] as LabProject[]
 };
 
 // --- Components ---
@@ -239,6 +287,7 @@ export default function App() {
 
   const navLinks = [
     { name: 'About', href: '#about' },
+    { name: 'Projects', href: '#projects' },
     { name: 'Skills', href: '#skills' },
     { name: 'Experience', href: '#experience' },
     { name: 'Certifications', href: '#certifications' },
@@ -392,125 +441,263 @@ export default function App() {
         </div>
       </section>
 
-      {/* Marquee */}
-      <div className="py-10 bg-primary text-white overflow-hidden whitespace-nowrap border-y border-white/10">
-        <motion.div 
-          animate={{ x: [0, -1000] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="flex space-x-12 text-4xl md:text-6xl font-display font-bold uppercase italic opacity-50"
-        >
-          {Array(10).fill(0).map((_, i) => (
-            <span key={i} className="flex items-center">
-              {DATA.title} <span className="mx-8 text-accent">•</span>
-            </span>
-          ))}
-        </motion.div>
-      </div>
-
       {/* About Section */}
-      <section id="about" className="py-32 px-6 bg-white dark:bg-primary transition-colors">
+      <section id="about" className="py-32 px-6 bg-gray-50 dark:bg-gray-900 transition-colors">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative aspect-square rounded-[3rem] overflow-hidden group"
+            >
+              <img 
+                src="https://picsum.photos/seed/tech-support/800/800" 
+                alt="IT Support Professional" 
+                className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-accent/20 mix-blend-multiply group-hover:opacity-0 transition-opacity" />
+            </motion.div>
+
             <div>
-              <SectionHeading subtitle="A dedicated professional with a customer-oriented mindset.">
-                About Me
+              <SectionHeading subtitle="Bridging the gap between complex technical issues and seamless user experiences.">
+                The Support Specialist
               </SectionHeading>
-              <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                <p>{DATA.summary}</p>
-                <div className="pt-8 grid grid-cols-2 gap-8">
-                  <div>
-                    <h4 className="text-primary dark:text-white font-bold mb-2">Education</h4>
-                    <p className="text-sm">{DATA.education.school}</p>
-                    <p className="text-xs text-gray-500">{DATA.education.degree} ({DATA.education.period})</p>
-                  </div>
-                  <div>
-                    <h4 className="text-primary dark:text-white font-bold mb-2">Location</h4>
-                    <p className="text-sm">{DATA.location}</p>
-                    <p className="text-xs text-gray-500">Available for Onsite/Remote</p>
-                  </div>
-                </div>
+              
+              <div className="space-y-6 text-lg text-gray-600 dark:text-gray-400">
+                <p>
+                  With over 3 years of experience in the IT industry, I have developed a deep understanding of 
+                  enterprise-level application support and IT infrastructure. My journey began at 
+                  <span className="text-accent font-bold"> Telkom Indonesia</span>, where I mastered the art of 
+                  L2 troubleshooting and root cause analysis for high-traffic mobile and web applications.
+                </p>
+                <p>
+                  Currently, at <span className="text-accent font-bold">PT Aeronusa Inti Raya</span>, I focus on 
+                  the full lifecycle of IT assets and operational efficiency. I believe that great support isn't 
+                  just about fixing what's broken—it's about <span className="italic">negotiating better processes</span>, 
+                  educating users, and automating the mundane to focus on high-impact solutions.
+                </p>
+                <p>
+                  Beyond traditional support, I am an <span className="text-accent font-bold">AI-Native Builder</span>. 
+                  I leverage modern "Vibe Coding" workflows to rapidly prototype and deploy digital products—from 
+                  AI-powered language apps to personal finance trackers—proving that a support specialist can also 
+                  be a high-velocity product creator.
+                </p>
                 
-                <div className="pt-8">
-                  <h4 className="text-primary dark:text-white font-bold mb-4">Current Focus</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {DATA.currentFocus.map((focus, i) => (
-                      <div key={i} className="p-4 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800">
-                        <p className="text-sm font-bold text-accent mb-1">{focus.name}</p>
-                        <p className="text-xs text-gray-500">{focus.desc}</p>
-                      </div>
-                    ))}
-                  </div>
+                <div className="grid grid-cols-2 gap-6 pt-8">
+                  {DATA.currentFocus.map((focus) => (
+                    <div key={focus.name} className="p-6 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm">
+                      <h4 className="font-bold text-accent mb-2">{focus.name}</h4>
+                      <p className="text-sm leading-relaxed">{focus.desc}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { icon: <Cpu />, title: "IT Operations", desc: "Managing enterprise systems and infrastructure." },
-                { icon: <Layout />, title: "App Support", desc: "Resolving complex application-level incidents." },
-                { icon: <ShieldCheck />, title: "Access Mgmt", desc: "Provisioning and securing user accounts." },
-                { icon: <MessageSquare />, title: "Communication", desc: "Translating tech issues for non-tech users." }
-              ].map((item, i) => (
-                <motion.div 
-                  key={i}
-                  whileHover={{ y: -10 }}
-                  className="p-8 bg-gray-50 dark:bg-gray-900 rounded-3xl border border-transparent hover:border-accent/30 transition-all"
-                >
-                  <div className="w-12 h-12 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center text-accent mb-6 shadow-sm">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 font-display">{item.title}</h3>
-                  <p className="text-sm text-gray-500">{item.desc}</p>
-                </motion.div>
-              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-32 bg-gray-50 dark:bg-gray-900 px-6">
+      {/* Featured Projects Section */}
+      <section id="projects" className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
-          <SectionHeading subtitle="Comprehensive toolkit for enterprise IT and application support.">
-            My Expertise
+          <SectionHeading subtitle="Innovative solutions built to streamline technical operations and monitoring.">
+            Featured Projects
+          </SectionHeading>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Project 1: CCTV Sentinel */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-7 group relative bg-gray-900 rounded-[3rem] overflow-hidden border border-gray-800"
+            >
+              <div className="p-12 h-full flex flex-col justify-between relative z-10">
+                <div>
+                  <div className="flex items-center space-x-3 mb-6">
+                    <span className="px-3 py-1 bg-accent/20 text-accent text-[10px] font-bold uppercase tracking-widest rounded-full border border-accent/30">
+                      AI-Assisted Dev
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 text-white/60 text-[10px] font-bold uppercase tracking-widest rounded-full border border-white/10">
+                      Automation
+                    </span>
+                  </div>
+                  <h3 className="text-4xl font-display font-bold text-white mb-4 group-hover:text-accent transition-colors">
+                    CCTV Sentinel Dashboard
+                  </h3>
+                  <p className="text-gray-400 text-lg max-w-md mb-8">
+                    Automated monitoring system for branch CCTV status using Google AppScript and Looker Studio. 
+                    Reduced manual checking time by 85%.
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-3 mb-8">
+                    {['Google AppScript', 'Looker Studio', 'GSheets API', 'Vibe Coding'].map(tag => (
+                      <span key={tag} className="text-xs font-mono text-gray-500">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-6">
+                  <div className="flex items-center text-white font-bold group-hover:translate-x-2 transition-transform">
+                    View Case Study <ArrowUpRight size={20} className="ml-2" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Mockup Element */}
+              <div className="absolute bottom-0 right-0 w-2/3 h-2/3 bg-gradient-to-tl from-accent/20 to-transparent rounded-tl-[3rem] border-t border-l border-white/10 overflow-hidden translate-x-10 translate-y-10 group-hover:translate-x-5 group-hover:translate-y-5 transition-transform">
+                <div className="p-6 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="w-20 h-2 bg-white/20 rounded-full" />
+                    <div className="w-8 h-8 bg-accent rounded-full animate-pulse" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="h-24 bg-white/5 rounded-2xl border border-white/10" />
+                    <div className="h-24 bg-white/5 rounded-2xl border border-white/10" />
+                  </div>
+                  <div className="h-32 bg-white/5 rounded-2xl border border-white/10" />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Project 2: RCA LogBook */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="lg:col-span-5 group relative bg-accent rounded-[3rem] overflow-hidden"
+            >
+              <div className="p-12 h-full flex flex-col justify-between relative z-10 text-white">
+                <div>
+                  <div className="mb-6">
+                    <Layout size={40} className="opacity-50" />
+                  </div>
+                  <h3 className="text-3xl font-display font-bold mb-4">
+                    RCA LogBook & SOP Flow
+                  </h3>
+                  <p className="text-white/80 mb-8">
+                    Standardized L2 support workflows at Telkom Indonesia. Created interactive SOP flows in Figma 
+                    and a strategic knowledge base for rapid incident resolution.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {['Figma', 'Documentation', 'Process Design'].map(tag => (
+                      <span key={tag} className="px-3 py-1 bg-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-12">
+                  <div className="inline-flex items-center font-bold border-b-2 border-white/30 hover:border-white transition-all pb-1">
+                    Explore Documentation <ChevronRight size={16} className="ml-1" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Element */}
+              <div className="absolute -bottom-10 -right-10 opacity-20 group-hover:scale-110 transition-transform">
+                <MessageSquare size={200} />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Innovation Lab Section */}
+      <section id="lab" className="py-32 px-6 bg-gray-50 dark:bg-gray-900/50">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading subtitle="A collection of experimental digital products built using Vibe Coding and AI-assisted development.">
+            AI Innovation Lab
+          </SectionHeading>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {DATA.labProjects.map((project, idx) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="group p-8 bg-white dark:bg-gray-900 rounded-[2.5rem] border border-gray-100 dark:border-gray-800 hover:border-accent/30 transition-all hover:shadow-2xl hover:shadow-accent/5"
+              >
+                <div className="flex justify-between items-start mb-8">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-2xl group-hover:bg-accent group-hover:text-white transition-colors">
+                    {project.icon === 'Wallet' && <Wallet size={24} />}
+                    {project.icon === 'Languages' && <Languages size={24} />}
+                    {project.icon === 'Sparkles' && <Sparkles size={24} />}
+                    {project.icon === 'School' && <School size={24} />}
+                    {project.icon === 'Gamepad2' && <Gamepad2 size={24} />}
+                  </div>
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-2 text-gray-400 hover:text-accent transition-colors"
+                  >
+                    <ArrowUpRight size={20} />
+                  </a>
+                </div>
+
+                <div className="mb-6">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-accent mb-2 block">
+                    {project.category}
+                  </span>
+                  <h3 className="text-2xl font-display font-bold mb-3 group-hover:text-accent transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                    {project.desc}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {project.tech.map(t => (
+                    <span key={t} className="text-[10px] font-mono text-gray-400 bg-gray-50 dark:bg-gray-800 px-2 py-1 rounded-md">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading subtitle="A versatile toolkit combining enterprise-level support with modern automation capabilities.">
+            Technical Arsenal
           </SectionHeading>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold font-display mb-8 flex items-center">
-                <Terminal size={24} className="mr-3 text-accent" /> Technical Skills
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {DATA.skills.technical.map((skill, i) => (
-                  <span key={i} className="px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium shadow-sm border border-gray-100 dark:border-gray-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold font-display mb-8 flex items-center">
-                <Layout size={24} className="mr-3 text-accent" /> Tools & OS
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {DATA.skills.tools.map((tool, i) => (
-                  <span key={i} className="px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium shadow-sm border border-gray-100 dark:border-gray-700">
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold font-display mb-8 flex items-center">
-                <Award size={24} className="mr-3 text-accent" /> Soft Skills
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {DATA.skills.soft.map((skill, i) => (
-                  <span key={i} className="px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium shadow-sm border border-gray-100 dark:border-gray-700">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {Object.entries(DATA.skills).map(([category, items], idx) => (
+              <motion.div 
+                key={category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="p-8 bg-gray-50 dark:bg-gray-900 rounded-[2rem] border border-gray-100 dark:border-gray-800"
+              >
+                <div className="mb-6">
+                  {category === 'enterprise' && <ShieldCheck className="text-accent" size={32} />}
+                  {category === 'technical' && <Cpu className="text-accent" size={32} />}
+                  {category === 'automation' && <Terminal className="text-accent" size={32} />}
+                  {category === 'soft' && <Layout className="text-accent" size={32} />}
+                </div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">{category}</h3>
+                <ul className="space-y-4">
+                  {items.map((skill) => (
+                    <li key={skill} className="font-bold text-lg tracking-tight">{skill}</li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
